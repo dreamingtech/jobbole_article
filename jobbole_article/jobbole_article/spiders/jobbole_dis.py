@@ -28,12 +28,12 @@ class JobboleItSpider(RedisSpider):
         "SCHEDULER_PERSIST": True,
 
         # 指定redis数据库的连接参数
-        'REDIS_HOST': '219.235.1.146',
+        'REDIS_HOST': '127.0.0.1',
         'REDIS_PORT': 6379,
 
         # 指定 redis链接密码，和使用哪一个数据库
         'REDIS_PARAMS' : {
-            'password': 'Xzz@8481',
+            'password': 'password',
             'db': 2
         },
 
