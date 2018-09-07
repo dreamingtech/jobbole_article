@@ -85,8 +85,16 @@ class RandomUAIPDownloaderMiddleware(object):
     def process_exception(self, request, exception, spider):
 
 
-        # 如果出现了上面列表中的异常, 就认为代理失效了. 由于scrapy使用的是异步框架, 所以代理失效时会有很多个请求同时出现上面列表中的异常, 同时进入到这里的代码中执行. 如果按照一般的思路, 把更新代理的操作放在这里, 那么所有异常的请求进入此代码后都要更新代理, 都要向api发送请求获取代理地址, 此时就会出现代理请求太频繁的提示. 
-        # 这里使用的方法是, 只要出现了认为是代理失效的异常, 就把请求的proxy和user-agent设置为None, 同时设置另一个条件判断产生异常的代理是否等于self.proxy, 当异常发生时, 必定会有先后的顺序, 第1个异常的请求进入这里时, 满足此条件, 执行下面的代码, 更新self.user_agent和self.proxy. 当以后发生异常的请求再次进入到这里的逻辑时, 因为第1个请求已经更新了self.proxy的值, 就不能满足第2个if判断中的条件, 就不会执行更新代理的操作了, 这样就避免了所有发生异常的请求同时请求api更新代理的情况. 
+        # 如果出现了上面列表中的异常, 就认为代理失效了. 由于scrapy使用的是异步框架, 
+        # 所以代理失效时会有很多个请求同时出现上面列表中的异常, 同时进入到这里的代码中执行. 
+        # 如果按照一般的思路, 把更新代理的操作放在这里, 那么所有异常的请求进入此代码后都要更新代理, 
+        # 都要向api发送请求获取代理地址, 此时就会出现代理请求太频繁的提示. 
+        # 这里使用的方法是, 只要出现了认为是代理失效的异常, 就把请求的proxy和user-agent设置为None, 
+        # 同时设置另一个条件判断产生异常的代理是否等于self.proxy, 当异常发生时, 必定会有先后的顺序, 
+        # 第1个异常的请求进入这里时, 满足此条件, 执行下面的代码, 更新self.user_agent和self.proxy. 
+        # 当以后发生异常的请求再次进入到这里的逻辑时, 因为第1个请求已经更新了self.proxy的值, 
+        # 就不能满足第2个if判断中的条件, 就不会执行更新代理的操作了, 
+        # 这样就避免了所有发生异常的请求同时请求api更新代理的情况. 
         if isinstance(exception, self.exception_list):
             logger.info("Proxy {} 链接出错 {}".format(request.meta['proxy'], exception))
             self.lock.acquire()
@@ -105,8 +113,6 @@ class RandomUAIPDownloaderMiddleware(object):
             request.headers.setdefault('User-Agent', None)
 
         return request.replace(dont_filter=True)
-
-
 
 ```
 
