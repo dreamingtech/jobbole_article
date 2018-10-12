@@ -14,12 +14,12 @@
 
 # 从2个不同的api中获取代理
 def get_random_ip():
-    mogu_api = 'http://piping.mogumiao.com/proxy/api/get_ip_al?appKey=04756895ae5b498bb9b985798e990b9f&count=1&expiryDate=0&format=1&newLine=2'
+    mogu_api = 'http://piping.mogumiao.com/proxy/api/get_ip_al?appKey=04756895ae59f&count=1&expiryDate=0&format=1&newLine=2'
 
     # '{"code":"3001","msg":"提取频繁请按照规定频率提取!"}'
     # '{"code":"0","msg":[{"port":"35379","ip":"117.60.2.113"}]}'
 
-    xdaili_api = 'http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=9b3446e17b004293976e09a081022d73&orderno=YZ20188178415lSPZWO&returnType=2&count=1'
+    xdaili_api = 'http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=9ba08120188178415lSPZWO&returnType=2&count=1'
 
     # '{"ERRORCODE":"10055","RESULT":"提取太频繁,请按规定频率提取!"}'
     # '{"ERRORCODE":"0","RESULT":[{"port":"48448","ip":"115.203.196.254"}]}'
