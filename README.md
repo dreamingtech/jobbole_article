@@ -1,6 +1,9 @@
 # jobbole_article
 伯乐在线scrapy-redis+docker分布式爬虫
 
+# 最新说明
+可以使用代理池支持多个爬虫及分布式爬虫, 详见 https://github.com/dreamingtech/job_spider_project
+
 # 需求分析
 爬取某技术博客中所有的文章, 实现分布式并保存数据到mysql中.
 # 难点
